@@ -2,7 +2,7 @@
 
 > Query-ready National Stock Exchange of India historical daily OHLCV, delivery quantity, delivery percentage, and one-minute OHLCV data organized by symbol in Parquet files.
 
-Canonical repository: https://github.com/olo-labs/olo-testdata-parquet
+Canonical repository: https://github.com/olo-labs/olo-ai-training-data-nse
 
 ## Primary documentation
 

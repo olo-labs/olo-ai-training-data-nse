@@ -60,17 +60,17 @@ jobs:
           $sha = if ($env:DISPATCH_SHA) { $env:DISPATCH_SHA.Trim() } else { $env:MANUAL_SHA.Trim() }
           if ($sha -and $sha -notmatch '^[0-9a-fA-F]{40}$') { throw "Invalid min-candle commit SHA: $sha" }
 
-          git -C olo-testdata-nse-min-candle fetch origin main
+          git -C olo-ai-training-data-nse-min-candle fetch origin main
           if ($LASTEXITCODE -ne 0) { throw "Fetching min-candle main failed." }
           if (-not $sha) {
-            $sha = (git -C olo-testdata-nse-min-candle rev-parse origin/main).Trim()
+            $sha = (git -C olo-ai-training-data-nse-min-candle rev-parse origin/main).Trim()
           } else {
-            git -C olo-testdata-nse-min-candle fetch origin $sha
+            git -C olo-ai-training-data-nse-min-candle fetch origin $sha
             if ($LASTEXITCODE -ne 0) { throw "Fetching min-candle commit $sha failed." }
           }
-          git -C olo-testdata-nse-min-candle checkout --detach $sha
+          git -C olo-ai-training-data-nse-min-candle checkout --detach $sha
           if ($LASTEXITCODE -ne 0) { throw "Checking out min-candle commit $sha failed." }
-          $actual = (git -C olo-testdata-nse-min-candle rev-parse HEAD).Trim()
+          $actual = (git -C olo-ai-training-data-nse-min-candle rev-parse HEAD).Trim()
           if ($actual -ne $sha) { throw "Checked-out min-candle SHA does not match the requested SHA." }
 
           "sha=$sha" >> $env:GITHUB_OUTPUT
@@ -96,7 +96,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          root="release/olo-testdata-nse-$RELEASE_VERSION"
+          root="release/olo-ai-training-data-nse-$RELEASE_VERSION"
           mkdir -p "$root/database"
           rsync -a database/ "$root/database/" \
             --exclude='_cache/' --exclude='_temp/' --exclude='_buckets_*/' \
@@ -107,7 +107,7 @@ jobs:
           python parquet_database/package_split_release.py release "$RELEASE_VERSION"
 
           find release -maxdepth 1 -type f \
-            \( -name 'olo-testdata-nse-latest-*.zip' -o -name 'olo-testdata-nse-latest-split.sha256' \) \
+            \( -name 'olo-ai-training-data-nse-latest-*.zip' -o -name 'olo-ai-training-data-nse-latest-split.sha256' \) \
             -print | sort > release/assets.txt
           test -s release/assets.txt
           while IFS= read -r asset; do

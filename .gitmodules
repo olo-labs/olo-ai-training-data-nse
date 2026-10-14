@@ -1,15 +1,15 @@
-[submodule "olo-testdata-nse-min-candle"]
-	path = olo-testdata-nse-min-candle
-	url = https://github.com/olo-labs/olo-testdata-nse-min-candle.git
+[submodule "olo-ai-training-data-nse-min-candle"]
+	path = olo-ai-training-data-nse-min-candle
+	url = https://github.com/olo-labs/olo-ai-training-data-nse-min-candle.git
 	branch = main
 	ignore = dirty
-[submodule "olo-testdata-nse-day-delivery-candle"]
-	path = olo-testdata-nse-day-delivery-candle
-	url = https://github.com/olo-labs/olo-testdata-nse-day-delivery-candle.git
+[submodule "olo-ai-training-data-nse-day-delivery-candle"]
+	path = olo-ai-training-data-nse-day-delivery-candle
+	url = https://github.com/olo-labs/olo-ai-training-data-nse-day-delivery-candle.git
 	branch = main
 	ignore = dirty
-[submodule "olo-testdata-nse-day-index-candle"]
-	path = olo-testdata-nse-day-index-candle
-	url = https://github.com/olo-labs/olo-testdata-nse-day-index-candle.git
+[submodule "olo-ai-training-data-nse-day-index-candle"]
+	path = olo-ai-training-data-nse-day-index-candle
+	url = https://github.com/olo-labs/olo-ai-training-data-nse-day-index-candle.git
 	branch = main
 	ignore = dirty

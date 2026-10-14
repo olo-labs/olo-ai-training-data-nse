@@ -1,6 +1,6 @@
 # NSE Parquet Database File Structure
 
-This page specifies how NSE daily OHLCV, delivery data, and one-minute candle files are laid out in `olo-testdata-parquet`.
+This page specifies how NSE daily OHLCV, delivery data, and one-minute candle files are laid out in `olo-ai-training-data-nse`.
 
 ## Consumer-facing files
 

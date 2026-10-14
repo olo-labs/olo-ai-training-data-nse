@@ -55,7 +55,7 @@ jobs:
           }
           $version = "V" + $version.Substring(1)
           "version=$version" >> $env:GITHUB_OUTPUT
-          "archive=olo-testdata-nse-$version.zip" >> $env:GITHUB_OUTPUT
+          "archive=olo-ai-training-data-nse-$version.zip" >> $env:GITHUB_OUTPUT
 
       - name: Install database builder
         run: python -m pip install --disable-pip-version-check -r parquet_database/requirements.txt
@@ -73,7 +73,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          root="release/olo-testdata-nse-$VERSION"
+          root="release/olo-ai-training-data-nse-$VERSION"
           mkdir -p "$root/database"
 
           rsync -a database/ "$root/database/" \
@@ -87,7 +87,7 @@ jobs:
           cp -a olo-db-viewer "$root/olo-db-viewer"
           cp olo-db-viewer.bat LICENSE RELEASE_NOTES.md "$root/"
 
-          (cd release && zip -q -r -9 "$ARCHIVE" "olo-testdata-nse-$VERSION")
+          (cd release && zip -q -r -9 "$ARCHIVE" "olo-ai-training-data-nse-$VERSION")
           sha256sum "release/$ARCHIVE" > "release/$ARCHIVE.sha256"
 
       - name: Create or replace GitHub release
@@ -150,10 +150,10 @@ jobs:
 
             python parquet_database/package_split_release.py release "$VERSION"
             mapfile -t split_assets < <(find release -maxdepth 1 -type f \
-              \( -name "olo-testdata-nse-$VERSION-daily.zip" \
-                 -o -name "olo-testdata-nse-$VERSION-minute-*.zip" \
-                 -o -name "olo-testdata-nse-$VERSION-minute.zip" \
-                 -o -name "olo-testdata-nse-$VERSION-split.sha256" \) \
+              \( -name "olo-ai-training-data-nse-$VERSION-daily.zip" \
+                 -o -name "olo-ai-training-data-nse-$VERSION-minute-*.zip" \
+                 -o -name "olo-ai-training-data-nse-$VERSION-minute.zip" \
+                 -o -name "olo-ai-training-data-nse-$VERSION-split.sha256" \) \
               -print | sort)
             gh release upload "$VERSION" "${split_assets[@]}" --repo "$GITHUB_REPOSITORY"
           fi
