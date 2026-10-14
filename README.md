@@ -39,15 +39,15 @@ Common discovery terms: NSE historical data Parquet, NSE delivery data, Indian s
 ## Repository layout
 
 ```text
-olo-testdata-parquet/
+olo-ai-training-data-nse/
 ├── database/                              # generated query-ready Parquet database
 │   ├── a/ABAN/day.parquet                 # daily OHLCV + delivery data
 │   ├── a/ABAN/1m.parquet                  # one-minute OHLCV data
 │   ├── _cache/                            # incremental build cache
 │   ├── manifest.json                      # source fingerprints/build state
 │   └── build.log                          # build progress and diagnostics
-├── olo-testdata-nse-day-delivery-candle/ # daily delivery-data source submodule
-├── olo-testdata-nse-min-candle/          # minute-data source submodule
+├── olo-ai-training-data-nse-day-delivery-candle/ # daily delivery-data source submodule
+├── olo-ai-training-data-nse-min-candle/          # minute-data source submodule
 ├── parquet_database/                     # normalizers, builder, verification, tests
 ├── olo-db-viewer/                        # current desktop database checker
 ├── olo-viewer/                           # placeholder for the future viewer
@@ -141,8 +141,8 @@ tracking branch before generating the database. Both source submodules track
 dispatched minute-candle commit to keep that release reproducible.
 
 Cross-repository triggering requires a `PARENT_REPO_TOKEN` Actions secret in
-`olo-testdata-nse-min-candle`. Use a fine-grained token scoped to
-`olo-labs/olo-testdata-nse` with **Contents: write** permission.
+`olo-ai-training-data-nse-min-candle`. Use a fine-grained token scoped to
+`olo-labs/olo-ai-training-data-nse` with **Contents: write** permission.
 
 ## Desktop database checker
 
@@ -154,8 +154,8 @@ The screenshot uses a stable replace-in-place filename. When the interface chang
 
 The generated database normalizes two source submodules:
 
-- [`olo-testdata-nse-day-delivery-candle`](olo-testdata-nse-day-delivery-candle/): daily NSE OHLC, traded quantity, deliverable quantity, and delivery percentage.
-- [`olo-testdata-nse-min-candle`](olo-testdata-nse-min-candle/): one-minute NSE equity and index OHLCV archives.
+- [`olo-ai-training-data-nse-day-delivery-candle`](olo-ai-training-data-nse-day-delivery-candle/): daily NSE OHLC, traded quantity, deliverable quantity, and delivery percentage.
+- [`olo-ai-training-data-nse-min-candle`](olo-ai-training-data-nse-min-candle/): one-minute NSE equity and index OHLCV archives.
 
 Only daily rows in the `EQ` series define the exported equity universe. Minute index symbols are supported separately and may have only `1m.parquet`.
 

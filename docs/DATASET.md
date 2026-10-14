@@ -45,8 +45,8 @@ Do not assume that minute `volume` means deliverable quantity. Delivery informat
 
 The generated Parquet database normalizes two repository submodules:
 
-- `olo-testdata-nse-day-delivery-candle` supplies daily equity OHLCV and delivery observations;
-- `olo-testdata-nse-min-candle` supplies one-minute equity and index OHLCV observations.
+- `olo-ai-training-data-nse-day-delivery-candle` supplies daily equity OHLCV and delivery observations;
+- `olo-ai-training-data-nse-min-candle` supplies one-minute equity and index OHLCV observations.
 
 The builder normalizes source names and types into the shared schema and groups output by symbol. Source fingerprints and build state are recorded in `database/manifest.json`. See the [builder documentation](../parquet_database/README.md) for implementation and verification details.
 

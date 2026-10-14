@@ -2,7 +2,7 @@
 
 This folder builds one daily and one minute Parquet file per NSE equity. It is incremental: unchanged source files are recorded in `database/manifest.json` and cached as compact source-level Parquet files, so they are not parsed again.
 
-Minute indices from `olo-testdata-nse-min-candle/Minute/NSE_IDX` are also supported. They are exported as minute-only symbols without the equity-universe filter; selecting one in the desktop viewer automatically switches to the `1m` timeframe.
+Minute indices from `olo-ai-training-data-nse-min-candle/Minute/NSE_IDX` are also supported. They are exported as minute-only symbols without the equity-universe filter; selecting one in the desktop viewer automatically switches to the `1m` timeframe.
 
 ## One-click usage
 
@@ -34,7 +34,7 @@ Two resource profiles are included in `config.json`:
 
 Run **Actions > Manual database release > Run workflow** and provide a version such as `V1.0.1`. The workflow performs a clean build, verifies it, and publishes the database without its build cache together with the viewer, release notes, and license. Rerunning an existing version moves its tag to the selected commit and replaces its release metadata and assets.
 
-The workflow first attempts to upload a single `olo-testdata-nse-Vx.y.z.zip` together with its SHA-256 checksum. If that upload fails (for example, because it exceeds GitHub's per-asset size limit), the draft release instead receives one daily ZIP and one or more numbered minute ZIPs, each safely below the asset limit. All fallback archives include the viewer, release notes, and license. Extract every fallback ZIP into the same destination: their matching versioned root and `database/` paths merge, and the included viewer automatically discovers both sets of files as one database.
+The workflow first attempts to upload a single `olo-ai-training-data-nse-Vx.y.z.zip` together with its SHA-256 checksum. If that upload fails (for example, because it exceeds GitHub's per-asset size limit), the draft release instead receives one daily ZIP and one or more numbered minute ZIPs, each safely below the asset limit. All fallback archives include the viewer, release notes, and license. Extract every fallback ZIP into the same destination: their matching versioned root and `database/` paths merge, and the included viewer automatically discovers both sets of files as one database.
 
 The processing manifest is committed only after output verification, so an interrupted export is retried safely. Incremental export is timeframe-aware: changing delivery data rewrites only `day.parquet`; changing minute data rewrites only `1m.parquet`.
 
@@ -57,7 +57,7 @@ The included `.github/workflows/incremental-database-release.yml` runs when eith
 For immediate cross-repository triggering, each source repository can send this event after pushing its data commit (using a token that can dispatch events to this repository):
 
 ```bash
-gh api repos/olo-labs/olo-testdata-parquet/dispatches -f event_type=submodule-updated
+gh api repos/olo-labs/olo-ai-training-data-nse/dispatches -f event_type=submodule-updated
 ```
 
 Before the first automated run, publish the rolling base after `recreate.bat` succeeds:

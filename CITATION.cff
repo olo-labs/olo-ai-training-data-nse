@@ -4,8 +4,8 @@ title: "NSE India OHLCV and Delivery Data in Parquet"
 type: dataset
 authors:
   - name: "OLO Labs"
-repository-code: "https://github.com/olo-labs/olo-testdata-parquet"
-url: "https://github.com/olo-labs/olo-testdata-parquet"
+repository-code: "https://github.com/olo-labs/olo-ai-training-data-nse"
+url: "https://github.com/olo-labs/olo-ai-training-data-nse"
 license: Apache-2.0
 keywords:
   - NSE

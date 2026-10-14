@@ -46,7 +46,7 @@ def main() -> None:
     args = parser.parse_args()
 
     release_dir = args.release_dir.resolve()
-    root = release_dir / f"olo-testdata-nse-{args.version}"
+    root = release_dir / f"olo-ai-training-data-nse-{args.version}"
     database = root / "database"
     common_roots = [
         root / "olo-db-viewer",
@@ -67,18 +67,18 @@ def main() -> None:
         raise SystemExit("Both daily and minute Parquet files are required for a split release")
 
     outputs: list[Path] = []
-    daily_output = release_dir / f"olo-testdata-nse-{args.version}-daily.zip"
+    daily_output = release_dir / f"olo-ai-training-data-nse-{args.version}-daily.zip"
     write_zip(daily_output, release_dir, common, daily)
     outputs.append(daily_output)
 
     minute_groups = chunks(minute, args.group_bytes)
     for index, group in enumerate(minute_groups, start=1):
         suffix = "minute" if len(minute_groups) == 1 else f"minute-{index:03d}"
-        output = release_dir / f"olo-testdata-nse-{args.version}-{suffix}.zip"
+        output = release_dir / f"olo-ai-training-data-nse-{args.version}-{suffix}.zip"
         write_zip(output, release_dir, common, group)
         outputs.append(output)
 
-    checksum = release_dir / f"olo-testdata-nse-{args.version}-split.sha256"
+    checksum = release_dir / f"olo-ai-training-data-nse-{args.version}-split.sha256"
     checksum.write_text(
         "".join(f"{sha256(path)}  {path.name}\n" for path in outputs),
         encoding="ascii",
